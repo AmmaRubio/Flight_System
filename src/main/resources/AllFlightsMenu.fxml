@@ -10,16 +10,16 @@
             <Button mnemonicParsing="false" onAction="#switchToMainMenu" onMouseClicked="#switchToMainMenu" text="Main Menu" />
          </children>
       </HBox>
-      <TableView prefHeight="200.0" prefWidth="200.0">
+      <TableView fx:id="table" prefHeight="200.0" prefWidth="200.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="Id" />
-          <TableColumn prefWidth="75.0" text="Company" />
-            <TableColumn prefWidth="75.0" text="Departure" />
-            <TableColumn prefWidth="75.0" text="Destination" />
-            <TableColumn prefWidth="75.0" text="Date" />
-            <TableColumn prefWidth="75.0" text="Departure time" />
-            <TableColumn prefWidth="75.0" text="Destination time" />
-            <TableColumn prefWidth="75.0" text="Duration" />
+          <TableColumn fx:id="id" prefWidth="75.0" text="Id" />
+          <TableColumn fx:id="company" prefWidth="75.0" text="Company" />
+            <TableColumn fx:id="departure" prefWidth="75.0" text="Departure" />
+            <TableColumn fx:id="destination" prefWidth="75.0" text="Destination" />
+            <TableColumn fx:id="date" prefWidth="75.0" text="Date" />
+            <TableColumn fx:id="departureTime" prefWidth="75.0" text="Departure time" />
+            <TableColumn fx:id="destinationTime" prefWidth="75.0" text="Destination time" />
+            <TableColumn fx:id="duration" prefWidth="75.0" text="Duration" />
         </columns>
       </TableView>
    </items>
