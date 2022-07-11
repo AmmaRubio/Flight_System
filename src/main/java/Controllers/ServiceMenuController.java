@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import view.FxmlView;
 
 @Controller
-public class ServiceMenu {
+public class ServiceMenuController {
     private StageManager stageManager = MenuApplication.getStageManager();
 
 

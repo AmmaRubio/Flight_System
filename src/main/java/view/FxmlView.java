@@ -30,6 +30,28 @@ public enum FxmlView {
         public String getFxmlFile() {
             return "MovieMenu.fxml";
         }
+    },
+    MAIN_MENU{
+        @Override
+        public String getTitle() {
+            return "Main Menu";
+        }
+
+        @Override
+        public String getFxmlFile() {
+            return "MainMenu.fxml";
+        }
+    },
+    ALL_FLIGHTS_MENU{
+        @Override
+        public String getTitle() {
+            return "All Flights Menu";
+        }
+
+        @Override
+        public String getFxmlFile() {
+            return "AllFLightsMenu.fxml";
+        }
     };
 
     public abstract String getTitle();

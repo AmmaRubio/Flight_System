@@ -1,30 +1,28 @@
+package Controllers;
+
 import MockClasses.Flight;
+import config.StageManager;
+import flight.system.mainmenu.MenuApplication;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
 import javafx.scene.control.TableView;
+import view.FxmlView;
 
 
-import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
 
 public class AllFlightsMenuController implements Initializable {
-    private final String MAINMENU_TITLE = "All flights Menu";
+    private StageManager stageManager = MenuApplication.getStageManager();
 
     @FXML private Label label;
     @FXML private TableView table;
@@ -37,6 +35,7 @@ public class AllFlightsMenuController implements Initializable {
     @FXML private TableColumn<Flight,String> destinationTime;
     @FXML private TableColumn<Flight,String> duration;
 
+
     //Mock data: TODO: implement normal data. Only this should be changed
     private final ObservableList<Flight> mockData =
             FXCollections.observableArrayList(new Flight(1L,"Munich","Frankfurt",
@@ -44,18 +43,7 @@ public class AllFlightsMenuController implements Initializable {
                     LocalTime.of(14,00), "LH"));
 
     public void switchToMainMenu(ActionEvent event){
-        try{
-            Parent parent = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
-
-
-            Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(parent);
-            stage.setScene(scene);
-            stage.setTitle(MAINMENU_TITLE);
-            stage.show();
-        } catch (Exception e){
-            throw new RuntimeException(e);
-        }
+        stageManager.switchScene(FxmlView.MAIN_MENU);
     }
 
     @Override
@@ -73,17 +61,6 @@ public class AllFlightsMenuController implements Initializable {
     }
 
     public void switchToCityMenu(ActionEvent event){
-        try{
-            Parent parent = FXMLLoader.load(getClass().getResource("CityMenu"));
 
-
-            Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(parent);
-            stage.setScene(scene);
-            stage.setTitle("City Menu"); //TODO implement name of city as city title
-            stage.show();
-        } catch (Exception e){
-            throw new RuntimeException(e);
-        }
     }
 }

@@ -1,17 +1,13 @@
 package flight.system.mainmenu;
 
-import config.SpringFXMLLoader;
 import config.StageManager;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ConfigurableApplicationContext;
 import view.FxmlView;
-
-import java.awt.*;
 
 @SpringBootApplication
 public class MenuApplication extends Application {
@@ -46,7 +42,7 @@ public class MenuApplication extends Application {
 
     protected void displayMenu() {
         System.out.println("displaying menu...");
-        stageManager.switchScene(FxmlView.ENTERTAINMENT_MENU);
+        stageManager.switchScene(FxmlView.MAIN_MENU);
     }
 
 

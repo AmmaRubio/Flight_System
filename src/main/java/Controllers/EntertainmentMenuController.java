@@ -5,13 +5,11 @@ import config.StageManager;
 import flight.system.mainmenu.MenuApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 import view.FxmlView;
 
 @Controller
-public class EntertainmentMenu {
+public class EntertainmentMenuController {
 
     private StageManager stageManager = MenuApplication.getStageManager();
 
@@ -26,6 +24,6 @@ public class EntertainmentMenu {
     }
 
     public void goToMainMenu(ActionEvent actionEvent) {
-        System.out.println("No main menu implemented!");
+        stageManager.switchScene(FxmlView.MAIN_MENU);
     }
 }
