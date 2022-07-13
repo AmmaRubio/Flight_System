@@ -1,7 +1,7 @@
 package Controllers;
 
 import config.StageManager;
-import flight.system.mainmenu.MenuApplication;
+import flight.system.main.MenuApplication;
 import javafx.fxml.FXML;
 import org.springframework.stereotype.Controller;
 import view.FxmlView;

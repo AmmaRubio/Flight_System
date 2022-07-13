@@ -1,29 +1,35 @@
 package config;
 
-/*
+/**
 Manages switching scenes on the primary stage
  */
 
+import flight.system.main.MenuApplication;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 import view.FxmlView;
 
 import java.util.Objects;
 
-
+@Component
 public class StageManager {
     private final Stage primaryStage;
     private FXMLLoader fxmlLoader;
+  //added by Maksim
 
 
     public StageManager(FXMLLoader fxmlLoader, Stage stage) {
         this.fxmlLoader = fxmlLoader;
         this.primaryStage = stage;
     }
+
 
 
     public void switchScene(final FxmlView view) {
@@ -69,10 +75,14 @@ public class StageManager {
         System.out.println(errMsg + e.getCause());
         Platform.exit();
     }
+/*
+    public ApplicationContext getApplicationContext() {
+        return applicationContext;
+    }
 
+    public void setApplicationContext(ApplicationContext applicationContext) {
+        this.applicationContext = applicationContext;
+    }
 
-
-
-
-
+ */
 }

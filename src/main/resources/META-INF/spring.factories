@@ -1,1 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=config.AppJavaConfig
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=DB.client.flight.FlightClientConfiguration

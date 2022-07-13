@@ -1,9 +1,10 @@
 package Controllers;
 
 import config.StageManager;
-import flight.system.mainmenu.MenuApplication;
+import flight.system.main.MenuApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import org.springframework.stereotype.Component;
 import view.FxmlView;
 
 public class MainMenuController {

@@ -1,9 +1,15 @@
-package MockClasses;
+package DB.client.flight;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
-
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Flight {
     public Flight(Long id, String departure, String destination, LocalDate date,
                   LocalTime departureTime, LocalTime destinationTime,

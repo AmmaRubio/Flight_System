@@ -1,17 +1,21 @@
-package flight.system.mainmenu;
+package flight.system.main;
 
 import config.StageManager;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
 import view.FxmlView;
 
 @SpringBootApplication
 public class MenuApplication extends Application {
     protected ConfigurableApplicationContext applicationContext;
+
     public static StageManager stageManager;
 
     public static void run(final String[] args) {
