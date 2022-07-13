@@ -4,8 +4,10 @@ import config.StageManager;
 import flight.system.mainmenu.MenuApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import org.springframework.stereotype.Controller;
 import view.FxmlView;
 
+@Controller
 public class MainMenuController {
     private StageManager stageManager = MenuApplication.getStageManager();
 
