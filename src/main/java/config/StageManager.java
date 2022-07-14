@@ -4,33 +4,56 @@ package config;
 Manages switching scenes on the primary stage
  */
 
+import com.sun.javafx.fxml.BeanAdapter;
+import flight.system.mainmenu.MenuApplication;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import view.FxmlView;
 
+import java.io.IOException;
 import java.util.Objects;
 
 
 public class StageManager {
+
     private final Stage primaryStage;
     private FXMLLoader fxmlLoader;
 
-
-    public StageManager(FXMLLoader fxmlLoader, Stage stage) {
+public StageManager(FXMLLoader fxmlLoader, Stage stage) {
         this.fxmlLoader = fxmlLoader;
         this.primaryStage = stage;
     }
 
 
-    public void switchScene(final FxmlView view) {
+    public void switchScene( FxmlView view)  {
+    if(view == FxmlView.ALL_FLIGHTS_MENU){
+        try {
+            fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("AllFlightsMenu.fxml"));
+            fxmlLoader.setControllerFactory(aClass -> MenuApplication.getApplicationContext().getBean(aClass));
+            Parent rootnode = fxmlLoader.load();
+            primaryStage.setScene(new Scene(rootnode));
+            primaryStage.show();
+        }
+        catch (IOException e){
+            throw new RuntimeException(e);
+        }
+    }
+    else {
         Parent viewRootNodeHierarchy = loadViewNodeHierarchy(view.getFxmlFile());
         System.out.println("got the fxml path: " + view.getFxmlFile());
         show(viewRootNodeHierarchy, view.getTitle());
-
+    }
     }
 
     private void show(final Parent rootNode, String title) {
@@ -51,7 +74,7 @@ public class StageManager {
             rootNode = fxmlLoader.load();
             Objects.requireNonNull(rootNode, "A root FXML node must be not null");
         } catch (Exception e) {
-            exit("Unable to load FXML view" + fxmlPath, e);
+            exit("Unable to load FXML view " + fxmlPath, e);
         }
         return  rootNode;
     }
