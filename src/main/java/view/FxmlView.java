@@ -52,6 +52,14 @@ public enum FxmlView {
         public String getFxmlFile() {
             return "AllFLightsMenu.fxml";
         }
+    },
+    CITY_MENU{
+        @Override
+        public String getTitle() { return "City Menu"; }
+        @Override
+        public String getFxmlFile() {
+            return "CityMenu.fxml";
+        }
     };
 
     public abstract String getTitle();
