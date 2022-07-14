@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.TableView;
@@ -25,6 +26,7 @@ import view.FxmlView;
 
 
 import java.awt.*;
+import java.io.Console;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -67,6 +69,22 @@ public class AllFlightsMenuController implements Initializable, Consumer<Flight>
 
     public void initialize(URL location, ResourceBundle resources) {
         this.stageManager=MenuApplication.getStageManager();
+        departure.setCellFactory(tc -> {
+            TableCell<Flight, String> cell = new TableCell<Flight, String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty) ;
+                    setText(empty ? null : item);
+                }
+            };
+            cell.setOnMouseClicked(e -> {
+                if (! cell.isEmpty()) {
+                    String departure = cell.getItem();
+                    System.out.println(departure + " cell is clicked");
+                }
+            });
+            return cell ;
+        });// clickable departure
         data = FXCollections.observableArrayList(flightWebClient.getFlights());
         id.setCellValueFactory(new PropertyValueFactory<Flight, String>("id"));
         company.setCellValueFactory(new PropertyValueFactory<Flight, String>("company"));
@@ -77,6 +95,8 @@ public class AllFlightsMenuController implements Initializable, Consumer<Flight>
         destinationTime.setCellValueFactory(new PropertyValueFactory<Flight, String>("destinationTime"));
         duration.setCellValueFactory(new PropertyValueFactory<Flight, String>("duration"));
         table.getItems().setAll(data);
+
+
 
     }
 
