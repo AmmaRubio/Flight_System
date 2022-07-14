@@ -33,7 +33,7 @@
             <TableColumn prefWidth="152.0" text="Name" />
          </columns>
       </TableView>
-      <Label layoutX="258.0" layoutY="41.0"  fx:id="cityName" textAlignment="CENTER">
+      <Label layoutX="258.0" layoutY="41.0"  fx:id="cityLabel" textAlignment="CENTER">
          <font>
             <Font name="SansSerif Italic" size="18.0" />
          </font>

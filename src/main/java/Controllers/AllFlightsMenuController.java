@@ -64,9 +64,9 @@ public class AllFlightsMenuController implements Initializable, Consumer<Flight>
     public void switchToMainMenu(ActionEvent event){
         stageManager.switchScene(FxmlView.MAIN_MENU);
     }
+    public void switchToCityMenu(String cityName){stageManager.switchScene(FxmlView.CITY_MENU, cityName);}
 
     @Override
-
     public void initialize(URL location, ResourceBundle resources) {
         this.stageManager=MenuApplication.getStageManager();
         departure.setCellFactory(tc -> {
@@ -81,10 +81,28 @@ public class AllFlightsMenuController implements Initializable, Consumer<Flight>
                 if (! cell.isEmpty()) {
                     String departure = cell.getItem();
                     System.out.println(departure + " cell is clicked");
+                    switchToCityMenu(departure);
                 }
             });
             return cell ;
         });// clickable departure
+        departure.setCellFactory(tc -> {
+            TableCell<Flight, String> cell = new TableCell<Flight, String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty) ;
+                    setText(empty ? null : item);
+                }
+            };
+            cell.setOnMouseClicked(e -> {
+                if (! cell.isEmpty()) {
+                    String destination = cell.getItem();
+                    System.out.println(destination + " cell is clicked");
+                    switchToCityMenu(destination);
+                }
+            });
+            return cell ;
+        });// clickable destination
         data = FXCollections.observableArrayList(flightWebClient.getFlights());
         id.setCellValueFactory(new PropertyValueFactory<Flight, String>("id"));
         company.setCellValueFactory(new PropertyValueFactory<Flight, String>("company"));

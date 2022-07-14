@@ -11,7 +11,8 @@ import view.FxmlView;
 @Controller
 public class CityMenuController {
     @FXML
-    private Label cityName;
+    private Label cityLabel;
+    private  String cityName;
     private StageManager stageManager = MenuApplication.getStageManager();
 
 
@@ -22,7 +23,9 @@ public class CityMenuController {
 
     @FXML
     private void initialize() {
-        cityName.setText("Munich");
+        this.stageManager=MenuApplication.getStageManager();
+        this.cityName = stageManager.getCurrentCityName();
+        cityLabel.setText(cityName);
     }
 
 

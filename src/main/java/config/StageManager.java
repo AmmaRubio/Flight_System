@@ -29,6 +29,10 @@ public class StageManager {
 
     private final Stage primaryStage;
     private FXMLLoader fxmlLoader;
+    /**
+     * used by CityMenuController to identify the city - not very nicely implemented though :)
+     */
+    private String currentCityName;
 
 public StageManager(FXMLLoader fxmlLoader, Stage stage) {
         this.fxmlLoader = fxmlLoader;
@@ -54,6 +58,26 @@ public StageManager(FXMLLoader fxmlLoader, Stage stage) {
         System.out.println("got the fxml path: " + view.getFxmlFile());
         show(viewRootNodeHierarchy, view.getTitle());
     }
+    }
+    public void switchScene( FxmlView view, String city)  {
+        if(view == FxmlView.ALL_FLIGHTS_MENU){
+            try {
+                fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("AllFlightsMenu.fxml"));
+                fxmlLoader.setControllerFactory(aClass -> MenuApplication.getApplicationContext().getBean(aClass));
+                Parent rootnode = fxmlLoader.load();
+                primaryStage.setScene(new Scene(rootnode));
+                primaryStage.show();
+            }
+            catch (IOException e){
+                throw new RuntimeException(e);
+            }
+        }
+        else {
+            this.currentCityName = city;
+            Parent viewRootNodeHierarchy = loadViewNodeHierarchy(view.getFxmlFile());
+            System.out.println("got the fxml path: " + view.getFxmlFile());
+            show(viewRootNodeHierarchy, view.getTitle());
+        }
     }
 
     private void show(final Parent rootNode, String title) {
@@ -93,9 +117,7 @@ public StageManager(FXMLLoader fxmlLoader, Stage stage) {
         Platform.exit();
     }
 
-
-
-
-
-
+    public String getCurrentCityName() {
+        return currentCityName;
+    }
 }
