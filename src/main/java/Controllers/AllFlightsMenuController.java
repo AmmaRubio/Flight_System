@@ -1,5 +1,6 @@
 package Controllers;
 
+import DB.client.City.City;
 import DB.client.flight.Flight;
 import DB.client.flight.FlightWebClient;
 import config.StageManager;
@@ -42,15 +43,14 @@ public class AllFlightsMenuController implements Initializable, Consumer<Flight>
 
     public AllFlightsMenuController(FlightWebClient flightWebClient) {
         this.flightWebClient = flightWebClient;
-       // this.stageManager = MenuApplication.getStageManager();
     }
 
     @FXML private Label label;
     @FXML private TableView table;
     @FXML private TableColumn<Flight,String> id;
     @FXML private TableColumn<Flight,String> company;
-    @FXML private TableColumn<Flight, String> departure;
-    @FXML private TableColumn<Flight,String> destination;
+    @FXML private TableColumn<Flight, City> departure;
+    @FXML private TableColumn<Flight,City> destination;
     @FXML private TableColumn<Flight,String> date;
     @FXML private TableColumn<Flight,String> departureTime;
     @FXML private TableColumn<Flight,String> destinationTime;
@@ -64,41 +64,43 @@ public class AllFlightsMenuController implements Initializable, Consumer<Flight>
     public void switchToMainMenu(ActionEvent event){
         stageManager.switchScene(FxmlView.MAIN_MENU);
     }
-    public void switchToCityMenu(String cityName){stageManager.switchScene(FxmlView.CITY_MENU, cityName);}
+    public void switchToCityMenu(City city){stageManager.switchScene(FxmlView.CITY_MENU, city);}
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.stageManager=MenuApplication.getStageManager();
-        departure.setCellFactory(tc -> {
-            TableCell<Flight, String> cell = new TableCell<Flight, String>() {
+         departure.setCellFactory(tc -> {
+            TableCell<Flight, City> cell = new TableCell<Flight, City>() {
                 @Override
-                protected void updateItem(String item, boolean empty) {
+                protected void updateItem(City item, boolean empty) {
                     super.updateItem(item, empty) ;
-                    setText(empty ? null : item);
+                    setText(empty ? null : item.getName());
                 }
             };
             cell.setOnMouseClicked(e -> {
                 if (! cell.isEmpty()) {
-                    String departure = cell.getItem();
+                    String departure = cell.getItem().getName();
+                    City city = cell.getItem();
                     System.out.println(departure + " cell is clicked");
-                    switchToCityMenu(departure);
+                    switchToCityMenu(city);
                 }
             });
             return cell ;
         });// clickable departure
-        departure.setCellFactory(tc -> {
-            TableCell<Flight, String> cell = new TableCell<Flight, String>() {
+        destination.setCellFactory(tc -> {
+            TableCell<Flight, City> cell = new TableCell<Flight, City>() {
                 @Override
-                protected void updateItem(String item, boolean empty) {
+                protected void updateItem(City item, boolean empty) {
                     super.updateItem(item, empty) ;
-                    setText(empty ? null : item);
+                    setText(empty ? null : item.getName());
                 }
             };
             cell.setOnMouseClicked(e -> {
                 if (! cell.isEmpty()) {
-                    String destination = cell.getItem();
+                    String destination = cell.getItem().getName();
+                    City city = cell.getItem();
                     System.out.println(destination + " cell is clicked");
-                    switchToCityMenu(destination);
+                    switchToCityMenu(city);
                 }
             });
             return cell ;
@@ -106,16 +108,13 @@ public class AllFlightsMenuController implements Initializable, Consumer<Flight>
         data = FXCollections.observableArrayList(flightWebClient.getFlights());
         id.setCellValueFactory(new PropertyValueFactory<Flight, String>("id"));
         company.setCellValueFactory(new PropertyValueFactory<Flight, String>("company"));
-        departure.setCellValueFactory(new PropertyValueFactory<Flight, String>("departure"));
-        destination.setCellValueFactory(new PropertyValueFactory<Flight, String>("destination"));
+        departure.setCellValueFactory(new PropertyValueFactory<Flight, City>("departure"));
+        destination.setCellValueFactory(new PropertyValueFactory<Flight, City>("destination"));
         date.setCellValueFactory(new PropertyValueFactory<Flight, String>("date"));
         departureTime.setCellValueFactory(new PropertyValueFactory<Flight, String>("departureTime"));
         destinationTime.setCellValueFactory(new PropertyValueFactory<Flight, String>("destinationTime"));
         duration.setCellValueFactory(new PropertyValueFactory<Flight, String>("duration"));
         table.getItems().setAll(data);
-
-
-
     }
 
     public void switchToCityMenu(ActionEvent event){

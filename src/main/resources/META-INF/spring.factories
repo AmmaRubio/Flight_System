@@ -1,7 +1,8 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 DB.client.flight.FlightClientConfiguration,\
 config.AppJavaConfig,\
-Controllers.AllFlightsMenuController
+Controllers.AllFlightsMenuController,\
+Controllers.CityMenuController
 
 
 

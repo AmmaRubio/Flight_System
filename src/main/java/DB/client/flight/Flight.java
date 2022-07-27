@@ -1,5 +1,6 @@
 package DB.client.flight;
 
+import DB.client.City.City;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,7 +12,7 @@ import java.time.LocalTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Flight {
-    public Flight(Long id, String departure, String destination, LocalDate date,
+    public Flight(Long id, City departure, City destination, LocalDate date,
                   LocalTime departureTime, LocalTime destinationTime,
                   String company) {
         this.id = id;
@@ -25,8 +26,8 @@ public class Flight {
     }
 
     private Long id;
-    private String departure;
-    private String destination;// TODO: change Class to city
+    private City departure;
+    private City destination;// TODO: change Class to city
     private LocalDate date;
     private LocalTime departureTime; // TODO: change naming in UML class diagram
     private LocalTime destinationTime;
@@ -41,19 +42,19 @@ public class Flight {
         this.id = id;
     }
 
-    public String getDeparture() {
+    public City getDeparture() {
         return departure;
     }
 
-    public void setDeparture(String departure) {
+    public void setDeparture(City departure) {
         this.departure = departure;
     }
 
-    public String getDestination() {
+    public City getDestination() {
         return destination;
     }
 
-    public void setDestination(String destination) {
+    public void setDestination(City destination) {
         this.destination = destination;
     }
 
@@ -101,8 +102,8 @@ public class Flight {
     public String toString() {
         return "Flight{" +
                 "id=" + id +
-                ", departure='" + departure + '\'' +
-                ", destination='" + destination + '\'' +
+                ", departure='" + departure.getName() + '\'' +
+                ", destination='" + destination.getName() + '\'' +
                 ", date=" + date +
                 ", departureTime=" + departureTime +
                 ", destinationTime=" + destinationTime +

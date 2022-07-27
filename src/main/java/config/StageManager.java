@@ -4,6 +4,7 @@ package config;
 Manages switching scenes on the primary stage
  */
 
+import DB.client.City.City;
 import com.sun.javafx.fxml.BeanAdapter;
 import flight.system.mainmenu.MenuApplication;
 import javafx.application.Platform;
@@ -32,7 +33,7 @@ public class StageManager {
     /**
      * used by CityMenuController to identify the city - not very nicely implemented though :)
      */
-    private String currentCityName;
+    private City currentCity;
 
 public StageManager(FXMLLoader fxmlLoader, Stage stage) {
         this.fxmlLoader = fxmlLoader;
@@ -59,7 +60,7 @@ public StageManager(FXMLLoader fxmlLoader, Stage stage) {
         show(viewRootNodeHierarchy, view.getTitle());
     }
     }
-    public void switchScene( FxmlView view, String city)  {
+    public void switchScene( FxmlView view, City city)  {
         if(view == FxmlView.ALL_FLIGHTS_MENU){
             try {
                 fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("AllFlightsMenu.fxml"));
@@ -73,7 +74,7 @@ public StageManager(FXMLLoader fxmlLoader, Stage stage) {
             }
         }
         else {
-            this.currentCityName = city;
+            this.currentCity = city;
             Parent viewRootNodeHierarchy = loadViewNodeHierarchy(view.getFxmlFile());
             System.out.println("got the fxml path: " + view.getFxmlFile());
             show(viewRootNodeHierarchy, view.getTitle());
@@ -117,7 +118,7 @@ public StageManager(FXMLLoader fxmlLoader, Stage stage) {
         Platform.exit();
     }
 
-    public String getCurrentCityName() {
-        return currentCityName;
+    public City getCurrentCity() {
+        return currentCity;
     }
 }
