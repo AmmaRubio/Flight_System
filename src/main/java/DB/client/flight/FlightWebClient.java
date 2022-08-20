@@ -47,6 +47,8 @@ public class FlightWebClient {
     }
 
     /**
+     * returns all flights that passenger has
+     * Uses uri: "http://localhost:8080/passenger/{passengerId}/flight"
      * @param passengerId indicates which passenger's flights to return
      * @return return list of flights
      */
@@ -67,7 +69,8 @@ public class FlightWebClient {
     }
 
     /**
-     * Rest put request that adds the flight to the passenger`s List<Flight> flights
+     * Rest put request that adds the flight to the passenger`s List<Flight> flights.
+     * Uses uri: "http://localhost:8080/passenger/addFlight/{passengerId}"
      * @param passengerId determines to which passenger add the flight
      * @param flight single object (not list), determines which flight to assign to passenger
      */
