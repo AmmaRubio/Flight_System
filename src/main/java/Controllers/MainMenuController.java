@@ -20,4 +20,6 @@ public class MainMenuController {
     public void switchToEntertaimentMenu(ActionEvent event){
         stageManager.switchScene(FxmlView.ENTERTAINMENT_MENU);
     }
+
+
 }

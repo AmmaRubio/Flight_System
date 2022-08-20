@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 import java.io.IOException;
 import java.util.List;
@@ -63,5 +64,15 @@ public class FlightWebClient {
                 .bodyToFlux(City.class)
                 .doOnError(IOException.class, e -> log.error(e.getMessage()))
                 .toStream().collect(Collectors.toList()).get(0);
+    }
+
+    /**
+     * Rest put request that adds the flight to the passenger`s List<Flight> flights
+     * @param passengerId determines to which passenger add the flight
+     * @param flight single object (not list), determines which flight to assign to passenger
+     */
+    public void addFlightToPassenger(Long passengerId, Flight flight){
+        webClient.put().uri("http://localhost:8080/passenger/addFlight/{passengerId}") // access end point REST put
+                .body(Mono.just(flight), Flight.class);// should convert object Flight to JSON body
     }
 }
